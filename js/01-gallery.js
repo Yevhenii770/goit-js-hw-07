@@ -34,22 +34,31 @@ function onGallaryClick(event) {
     return;
   };
 
-
   const instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600">
   `);
+  
+
   instance.show();
-  window.addEventListener('keydown', onEsc);
-    
-
-  function onEsc(event) {
-
+  
+  function onEscClose(event) {
     if (event.key === 'Escape') {
       instance.close();
-      window.removeEventListener('keydown', onEsc);
     };
-  };
-  
+};
+
+  if (instance.visible()) {
+    window.addEventListener('keydown', onEscClose);
+  } if (!instance.visible()) {
+    window.removeEventListener('keydown', onEscClose);
+  }
+
 }
 
+
+
+
   
+
+    
+    
